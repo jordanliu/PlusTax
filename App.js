@@ -4,7 +4,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,6 +15,14 @@ import {
 } from 'react-native';
 
 const App: () => React$Node = () => {
+  const [value, setValue] = useState(0.0);
+
+  const calculateTax = text => {
+    let val = text;
+    let taxAmount = val - val * 0.155;
+    setValue(Math.floor(taxAmount));
+  };
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -22,11 +30,13 @@ const App: () => React$Node = () => {
         <View style={styles.header}>
           <Text style={styles.text}>PlusTax</Text>
           <View style={styles.wrapper}>
+            <Text style={styles.valueText}>${value}</Text>
             <TextInput
               style={styles.input}
-              autoFocus={false}
+              autoFocus={true}
               keyboardType="numeric"
               placeholder="Enter item amount"
+              onChangeText={text => calculateTax(text)}
             />
           </View>
         </View>
@@ -43,6 +53,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   text: {
+    fontSize: 36,
+    fontWeight: 'bold',
+  },
+  valueText: {
+    paddingTop: 100,
+    padding: 25,
+    textAlign: 'center',
     fontSize: 36,
     fontWeight: 'bold',
   },
