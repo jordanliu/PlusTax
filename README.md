@@ -12,8 +12,8 @@ Tax calculator built with React Native.
 
     ```shell
     cd PlusTax/
-    npx react-native run-ios // -> for iOS
-    npx react-native run-android // -> for Android
+    npx react-native run-ios //for iOS
+    npx react-native run-android //for Android
     ```
 
 1.  **Open the source code and start editing!**
