@@ -15,12 +15,13 @@ import {
 } from 'react-native';
 
 const App: () => React$Node = () => {
-  const [value, setValue] = useState(0.0);
+  const [value, setValue] = useState(0);
+  const [tax, setTax] = useState(0);
 
-  const calculateTax = text => {
-    let val = text;
-    let taxAmount = val - val * 0.155;
-    setValue(Math.floor(taxAmount));
+  const calculateTax = val => {
+    const cost = parseFloat(val);
+    const salesTax = cost * 0.155;
+    setTax((salesTax + cost).toFixed(2));
   };
 
   return (
@@ -30,13 +31,13 @@ const App: () => React$Node = () => {
         <View style={styles.header}>
           <Text style={styles.text}>PlusTax</Text>
           <View style={styles.wrapper}>
-            <Text style={styles.valueText}>${value}</Text>
+            <Text style={styles.valueText}>${tax}</Text>
             <TextInput
               style={styles.input}
               autoFocus={true}
               keyboardType="numeric"
               placeholder="Enter item amount"
-              onChangeText={text => calculateTax(text)}
+              onChangeText={val => calculateTax(val)}
             />
           </View>
         </View>
