@@ -34,9 +34,14 @@ const App: () => React$Node = () => {
           <View style={[{flex: 1}]}>
             <Text style={styles.headerStyle}>PlusTax</Text>
           </View>
-          <View style={{flex: 1, backgroundColor: '#6246EA'}}>
+          <View style={{flex: 0.6, backgroundColor: '#6246EA'}}>
             <Text style={styles.subText}>TAXED AMOUNT (15.5%)</Text>
-            <Text style={styles.valueText}>${tax}</Text>
+            <Text style={styles.valueText}>
+              $
+              {isNaN(tax)
+                ? 0
+                : tax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </Text>
           </View>
           <View style={{flex: 1, backgroundColor: '#6246EA'}}>
             <Text style={styles.subText}>AMOUNT</Text>
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     marginTop: 30,
-    marginLeft: 10,
+    marginLeft: 15,
     fontSize: 36,
     fontWeight: 'bold',
     color: '#FFFFFF',
